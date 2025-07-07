@@ -264,6 +264,193 @@
             gap: 15px;
         }
 
+        /* Tabs System */
+        .tabs-container {
+            margin-bottom: 30px;
+        }
+
+        .tabs-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+            overflow-x: auto;
+            padding-bottom: 10px;
+        }
+
+        .tabs-header::-webkit-scrollbar {
+            height: 6px;
+        }
+
+        .tabs-header::-webkit-scrollbar-track {
+            background: #f1f1f1;
+            border-radius: 3px;
+        }
+
+        .tabs-header::-webkit-scrollbar-thumb {
+            background: #ccc;
+            border-radius: 3px;
+        }
+
+        .tab-button {
+            position: relative;
+            padding: 12px 20px;
+            border: none;
+            background: #f8f9fa;
+            color: #666;
+            border-radius: 10px 10px 0 0;
+            cursor: pointer;
+            margin-right: 5px;
+            transition: all 0.3s ease;
+            white-space: nowrap;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 14px;
+            font-weight: 500;
+        }
+
+        .tab-button.active {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.3);
+        }
+
+        .tab-button:hover:not(.active) {
+            background: #e9ecef;
+            transform: translateY(-2px);
+        }
+
+        .tab-button .status-indicator {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: #28a745;
+            animation: pulse 2s infinite;
+        }
+
+        .tab-button .close-tab {
+            margin-left: 8px;
+            background: rgba(255, 255, 255, 0.2);
+            border: none;
+            color: inherit;
+            width: 18px;
+            height: 18px;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+            transition: all 0.2s ease;
+        }
+
+        .tab-button .close-tab:hover {
+            background: rgba(255, 255, 255, 0.3);
+        }
+
+        .tab-content {
+            display: none;
+            background: #f8f9fa;
+            border-radius: 15px;
+            padding: 25px;
+            min-height: 400px;
+        }
+
+        .tab-content.active {
+            display: block;
+            animation: fadeIn 0.3s ease;
+        }
+
+        .machine-info {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin-bottom: 25px;
+        }
+
+        .info-card {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .info-card h4 {
+            color: #333;
+            margin-bottom: 15px;
+            font-size: 16px;
+            font-weight: 600;
+        }
+
+        .info-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 8px 0;
+            border-bottom: 1px solid #f0f0f0;
+        }
+
+        .info-item:last-child {
+            border-bottom: none;
+        }
+
+        .info-label {
+            color: #666;
+            font-size: 14px;
+        }
+
+        .info-value {
+            color: #333;
+            font-weight: 500;
+        }
+
+        .machine-controls {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .machine-btn {
+            padding: 10px 16px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 13px;
+            font-weight: 500;
+            transition: all 0.2s ease;
+        }
+
+        .machine-btn.primary {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+
+        .machine-btn.success {
+            background: linear-gradient(135deg, #28a745 0%, #20c997 100%);
+            color: white;
+        }
+
+        .machine-btn.warning {
+            background: linear-gradient(135deg, #ffc107 0%, #ff8c00 100%);
+            color: white;
+        }
+
+        .machine-btn.danger {
+            background: linear-gradient(135deg, #dc3545 0%, #c82333 100%);
+            color: white;
+        }
+
+        .machine-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        @keyframes pulse {
+            0% { opacity: 1; }
+            50% { opacity: 0.5; }
+            100% { opacity: 1; }
+        }
+
         .control-btn {
             padding: 15px 20px;
             border: none;
@@ -367,70 +554,97 @@
             </div>
 
             <div class="dashboard-content">
-                <!-- Statistics -->
-                <div class="stats-grid">
-                    <div class="stat-card">
-                        <div class="stat-number" id="connectedDevices">24</div>
-                        <div class="stat-label">Appareils connectés</div>
+                <!-- Machine Tabs -->
+                <div class="tabs-container">
+                    <div class="tabs-header" id="tabsHeader">
+                        <button class="tab-button active" data-tab="overview">
+                            📊 Vue d'ensemble
+                        </button>
                     </div>
-                    <div class="stat-card">
-                        <div class="stat-number" id="activeUsers">156</div>
-                        <div class="stat-label">Utilisateurs actifs</div>
-                    </div>
-                    <div class="stat-card">
-                        <div class="stat-number" id="systemLoad">67%</div>
-                        <div class="stat-label">Charge système</div>
-                    </div>
-                    <div class="stat-card">
-                        <div class="stat-number" id="uptime">99.9%</div>
-                        <div class="stat-label">Temps de fonctionnement</div>
-                    </div>
-                </div>
+                    
+                    <div class="tab-content active" id="overview">
+                        <!-- Statistics -->
+                        <div class="stats-grid">
+                            <div class="stat-card">
+                                <div class="stat-number" id="connectedDevices">24</div>
+                                <div class="stat-label">Appareils connectés</div>
+                            </div>
+                            <div class="stat-card">
+                                <div class="stat-number" id="activeUsers">156</div>
+                                <div class="stat-label">Utilisateurs actifs</div>
+                            </div>
+                            <div class="stat-card">
+                                <div class="stat-number" id="systemLoad">67%</div>
+                                <div class="stat-label">Charge système</div>
+                            </div>
+                            <div class="stat-card">
+                                <div class="stat-number" id="uptime">99.9%</div>
+                                <div class="stat-label">Temps de fonctionnement</div>
+                            </div>
+                        </div>
 
-                <!-- Activity Feed -->
-                <div class="activity-section">
-                    <h3 class="section-title">Activité récente</h3>
-                    <div id="activityFeed">
-                        <div class="activity-item">
-                            <div class="activity-icon">U</div>
-                            <div class="activity-content">
-                                <div class="activity-title">Nouvel utilisateur connecté</div>
-                                <div class="activity-time">Il y a 2 minutes</div>
+                        <!-- Activity Feed -->
+                        <div class="activity-section">
+                            <h3 class="section-title">Activité récente</h3>
+                            <div id="activityFeed">
+                                <div class="activity-item">
+                                    <div class="activity-icon">U</div>
+                                    <div class="activity-content">
+                                        <div class="activity-title">Nouvel utilisateur connecté</div>
+                                        <div class="activity-time">Il y a 2 minutes</div>
+                                    </div>
+                                </div>
+                                <div class="activity-item">
+                                    <div class="activity-icon">S</div>
+                                    <div class="activity-content">
+                                        <div class="activity-title">Mise à jour système terminée</div>
+                                        <div class="activity-time">Il y a 15 minutes</div>
+                                    </div>
+                                </div>
+                                <div class="activity-item">
+                                    <div class="activity-icon">A</div>
+                                    <div class="activity-content">
+                                        <div class="activity-title">Alerte de sécurité résolue</div>
+                                        <div class="activity-time">Il y a 1 heure</div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
-                        <div class="activity-item">
-                            <div class="activity-icon">S</div>
-                            <div class="activity-content">
-                                <div class="activity-title">Mise à jour système terminée</div>
-                                <div class="activity-time">Il y a 15 minutes</div>
-                            </div>
-                        </div>
-                        <div class="activity-item">
-                            <div class="activity-icon">A</div>
-                            <div class="activity-content">
-                                <div class="activity-title">Alerte de sécurité résolue</div>
-                                <div class="activity-time">Il y a 1 heure</div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
 
-                <!-- Controls -->
-                <div class="activity-section">
-                    <h3 class="section-title">Contrôles du système</h3>
-                    <div class="controls-section">
-                        <button class="control-btn primary" onclick="systemAction('restart')">
-                            🔄 Redémarrer les services
-                        </button>
-                        <button class="control-btn" onclick="systemAction('backup')">
-                            💾 Créer une sauvegarde
-                        </button>
-                        <button class="control-btn" onclick="systemAction('maintenance')">
-                            🔧 Mode maintenance
-                        </button>
-                        <button class="control-btn danger" onclick="systemAction('emergency')">
-                            🚨 Arrêt d'urgence
-                        </button>
+                        <!-- Controls -->
+                        <div class="activity-section">
+                            <h3 class="section-title">Contrôles généraux</h3>
+                            <div class="controls-section">
+                                <button class="control-btn primary" onclick="systemAction('restart')">
+                                    🔄 Redémarrer les services
+                                </button>
+                                <button class="control-btn" onclick="systemAction('backup')">
+                                    💾 Créer une sauvegarde
+                                </button>
+                                <button class="control-btn" onclick="systemAction('maintenance')">
+                                    🔧 Mode maintenance
+                                </button>
+                                <button class="control-btn danger" onclick="systemAction('emergency')">
+                                    🚨 Arrêt d'urgence
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Simulation Controls -->
+                        <div class="activity-section">
+                            <h3 class="section-title">Simulation de machines</h3>
+                            <div class="controls-section">
+                                <button class="control-btn primary" onclick="simulateNewMachine()">
+                                    🖥️ Ajouter une machine
+                                </button>
+                                <button class="control-btn" onclick="simulateRandomConnection()">
+                                    🔗 Connexion aléatoire
+                                </button>
+                                <button class="control-btn danger" onclick="disconnectRandomMachine()">
+                                    ❌ Déconnecter une machine
+                                </button>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -456,6 +670,13 @@
         // État de l'application
         let currentUser = null;
         let statsInterval = null;
+        let connectedMachines = new Map();
+        let activeTab = 'overview';
+
+        // Données des machines simulées
+        const machineTypes = ['Windows', 'Linux', 'macOS', 'Server'];
+        const machineNames = ['DESKTOP-001', 'LAPTOP-HR', 'SERVER-DB', 'WORKSTATION-DEV', 'PRINT-SERVER', 'BACKUP-001'];
+        let machineCounter = 0;
 
         // Gestion de la connexion
         authForm.addEventListener('submit', function(e) {
@@ -487,6 +708,14 @@
             
             // Ajouter une activité de connexion
             addActivity('Connexion utilisateur', `${currentUser} s'est connecté`);
+            
+            // Démarrer les fonctionnalités du tableau de bord
+            startDashboardFeatures();
+        }('Connexion utilisateur', `${currentUser} s'est connecté`);
+            
+            // Démarrer les fonctionnalités du tableau de bord
+            startDashboardFeatures();
+        }('Connexion utilisateur', `${currentUser} s'est connecté`);
         }
 
         // Déconnexion
@@ -503,6 +732,18 @@
             if (statsInterval) {
                 clearInterval(statsInterval);
             }
+            
+            // Nettoyer les onglets des machines
+            connectedMachines.clear();
+            const tabsHeader = document.getElementById('tabsHeader');
+            const tabsContainer = document.querySelector('.tabs-container');
+            
+            // Supprimer tous les onglets sauf "Vue d'ensemble"
+            tabsHeader.querySelectorAll('.tab-button:not([data-tab="overview"])').forEach(tab => tab.remove());
+            tabsContainer.querySelectorAll('.tab-content:not(#overview)').forEach(content => content.remove());
+            
+            // Réactiver l'onglet vue d'ensemble
+            switchTab('overview');
         });
 
         // Afficher une erreur
@@ -604,8 +845,301 @@
             }, 15000);
         }
 
+        // Gestion des onglets
+        function switchTab(tabId) {
+            // Désactiver tous les onglets
+            document.querySelectorAll('.tab-button').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            document.querySelectorAll('.tab-content').forEach(content => {
+                content.classList.remove('active');
+            });
+
+            // Activer l'onglet sélectionné
+            document.querySelector(`[data-tab="${tabId}"]`).classList.add('active');
+            document.getElementById(tabId).classList.add('active');
+            
+            activeTab = tabId;
+        }
+
+        // Créer un nouvel onglet pour une machine
+        function createMachineTab(machine) {
+            const tabsHeader = document.getElementById('tabsHeader');
+            const tabsContainer = document.querySelector('.tabs-container');
+
+            // Créer le bouton d'onglet
+            const tabButton = document.createElement('button');
+            tabButton.className = 'tab-button';
+            tabButton.setAttribute('data-tab', machine.id);
+            tabButton.onclick = () => switchTab(machine.id);
+            
+            tabButton.innerHTML = `
+                <span class="status-indicator"></span>
+                🖥️ ${machine.name}
+                <button class="close-tab" onclick="disconnectMachine('${machine.id}', event)">×</button>
+            `;
+
+            tabsHeader.appendChild(tabButton);
+
+            // Créer le contenu de l'onglet
+            const tabContent = document.createElement('div');
+            tabContent.className = 'tab-content';
+            tabContent.id = machine.id;
+
+            tabContent.innerHTML = `
+                <div class="machine-info">
+                    <div class="info-card">
+                        <h4>Informations générales</h4>
+                        <div class="info-item">
+                            <span class="info-label">Nom de la machine</span>
+                            <span class="info-value">${machine.name}</span>
+                        </div>
+                        <div class="info-item">
+                            <span class="info-label">Système d'exploitation</span>
+                            <span class="info-value">${machine.os}</span>
+                        </div>
+                        <div class="info-item">
+                            <span class="info-label">Adresse IP</span>
+                            <span class="info-value">${machine.ip}</span>
+                        </div>
+                        <div class="info-item">
+                            <span class="info-label">Statut</span>
+                            <span class="info-value" style="color: #28a745;">🟢 Connecté</span>
+                        </div>
+                        <div class="info-item">
+                            <span class="info-label">Dernière connexion</span>
+                            <span class="info-value">${machine.lastConnection}</span>
+                        </div>
+                    </div>
+
+                    <div class="info-card">
+                        <h4>Performances</h4>
+                        <div class="info-item">
+                            <span class="info-label">CPU</span>
+                            <span class="info-value">${machine.cpu}%</span>
+                        </div>
+                        <div class="info-item">
+                            <span class="info-label">Mémoire</span>
+                            <span class="info-value">${machine.memory}%</span>
+                        </div>
+                        <div class="info-item">
+                            <span class="info-label">Disque</span>
+                            <span class="info-value">${machine.disk}%</span>
+                        </div>
+                        <div class="info-item">
+                            <span class="info-label">Réseau</span>
+                            <span class="info-value">${machine.network} Mbps</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="activity-section">
+                    <h3 class="section-title">Contrôles de la machine</h3>
+                    <div class="machine-controls">
+                        <button class="machine-btn primary" onclick="sendMachineCommand('${machine.id}', 'status')">
+                            📊 Statut
+                        </button>
+                        <button class="machine-btn success" onclick="sendMachineCommand('${machine.id}', 'restart')">
+                            🔄 Redémarrer
+                        </button>
+                        <button class="machine-btn warning" onclick="sendMachineCommand('${machine.id}', 'maintenance')">
+                            🔧 Maintenance
+                        </button>
+                        <button class="machine-btn" onclick="sendMachineCommand('${machine.id}', 'backup')">
+                            💾 Sauvegarder
+                        </button>
+                        <button class="machine-btn danger" onclick="sendMachineCommand('${machine.id}', 'shutdown')">
+                            ⚡ Arrêter
+                        </button>
+                    </div>
+                </div>
+
+                <div class="activity-section">
+                    <h3 class="section-title">Logs de la machine</h3>
+                    <div id="machine-logs-${machine.id}" class="activity-feed">
+                        <div class="activity-item">
+                            <div class="activity-icon">🔗</div>
+                            <div class="activity-content">
+                                <div class="activity-title">Machine connectée</div>
+                                <div class="activity-time">Maintenant</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `;
+
+            tabsContainer.appendChild(tabContent);
+        }
+
+        // Simuler une nouvelle machine
+        function simulateNewMachine() {
+            const machineId = `machine-${++machineCounter}`;
+            const machineName = machineNames[Math.floor(Math.random() * machineNames.length)] + `-${machineCounter}`;
+            
+            const machine = {
+                id: machineId,
+                name: machineName,
+                os: machineTypes[Math.floor(Math.random() * machineTypes.length)],
+                ip: `192.168.1.${Math.floor(Math.random() * 254) + 1}`,
+                cpu: Math.floor(Math.random() * 80) + 10,
+                memory: Math.floor(Math.random() * 70) + 20,
+                disk: Math.floor(Math.random() * 60) + 30,
+                network: Math.floor(Math.random() * 900) + 100,
+                lastConnection: new Date().toLocaleString('fr-FR'),
+                connectedAt: new Date()
+            };
+
+            connectedMachines.set(machineId, machine);
+            createMachineTab(machine);
+            
+            // Mettre à jour les statistiques
+            updateConnectedDevicesCount();
+            
+            // Ajouter à l'activité
+            addActivity('Connexion', `${machine.name} s'est connecté`);
+            
+            // Passer à l'onglet de la nouvelle machine
+            switchTab(machineId);
+        }
+
+        // Simuler une connexion aléatoire
+        function simulateRandomConnection() {
+            // Simuler une connexion automatique toutes les 30 secondes
+            setTimeout(() => {
+                if (Math.random() > 0.7) { // 30% de chance
+                    simulateNewMachine();
+                }
+            }, Math.random() * 30000 + 5000);
+        }
+
+        // Déconnecter une machine
+        function disconnectMachine(machineId, event) {
+            if (event) {
+                event.stopPropagation();
+            }
+            
+            const machine = connectedMachines.get(machineId);
+            if (machine) {
+                // Supprimer l'onglet
+                const tabButton = document.querySelector(`[data-tab="${machineId}"]`);
+                const tabContent = document.getElementById(machineId);
+                
+                if (tabButton) tabButton.remove();
+                if (tabContent) tabContent.remove();
+                
+                // Supprimer de la liste
+                connectedMachines.delete(machineId);
+                
+                // Mettre à jour les statistiques
+                updateConnectedDevicesCount();
+                
+                // Ajouter à l'activité
+                addActivity('Déconnexion', `${machine.name} s'est déconnecté`);
+                
+                // Revenir à l'onglet vue d'ensemble si on était sur cet onglet
+                if (activeTab === machineId) {
+                    switchTab('overview');
+                }
+            }
+        }
+
+        // Déconnecter une machine au hasard
+        function disconnectRandomMachine() {
+            const machineIds = Array.from(connectedMachines.keys());
+            if (machineIds.length > 0) {
+                const randomId = machineIds[Math.floor(Math.random() * machineIds.length)];
+                disconnectMachine(randomId);
+            }
+        }
+
+        // Envoyer une commande à une machine
+        function sendMachineCommand(machineId, command) {
+            const machine = connectedMachines.get(machineId);
+            if (machine) {
+                const commands = {
+                    'status': 'Vérification du statut...',
+                    'restart': 'Redémarrage en cours...',
+                    'maintenance': 'Passage en mode maintenance...',
+                    'backup': 'Création de sauvegarde...',
+                    'shutdown': 'Arrêt de la machine...'
+                };
+                
+                const logContainer = document.getElementById(`machine-logs-${machineId}`);
+                if (logContainer) {
+                    const logItem = document.createElement('div');
+                    logItem.className = 'activity-item';
+                    logItem.innerHTML = `
+                        <div class="activity-icon">⚙️</div>
+                        <div class="activity-content">
+                            <div class="activity-title">${commands[command]}</div>
+                            <div class="activity-time">Maintenant</div>
+                        </div>
+                    `;
+                    logContainer.insertBefore(logItem, logContainer.firstChild);
+                    
+                    // Simuler la réponse
+                    setTimeout(() => {
+                        const responseItem = document.createElement('div');
+                        responseItem.className = 'activity-item';
+                        responseItem.innerHTML = `
+                            <div class="activity-icon">✅</div>
+                            <div class="activity-content">
+                                <div class="activity-title">${commands[command].replace('...', '')} terminé</div>
+                                <div class="activity-time">Il y a quelques secondes</div>
+                            </div>
+                        `;
+                        logContainer.insertBefore(responseItem, logContainer.firstChild);
+                    }, 2000);
+                }
+                
+                addActivity('Commande', `${command} envoyé à ${machine.name}`);
+            }
+        }
+
+        // Mettre à jour le nombre d'appareils connectés
+        function updateConnectedDevicesCount() {
+            const connectedDevices = document.getElementById('connectedDevices');
+            if (connectedDevices) {
+                connectedDevices.textContent = connectedMachines.size;
+            }
+        }
+
+        // Gestion des clics sur les onglets
+        document.addEventListener('click', function(e) {
+            if (e.target.classList.contains('tab-button') || e.target.closest('.tab-button')) {
+                const tabButton = e.target.classList.contains('tab-button') ? e.target : e.target.closest('.tab-button');
+                const tabId = tabButton.getAttribute('data-tab');
+                if (tabId) {
+                    switchTab(tabId);
+                }
+            }
+        });
+
+        // Simuler des connexions automatiques
+        function startAutoConnections() {
+            // Connexion initiale de quelques machines
+            setTimeout(() => simulateNewMachine(), 2000);
+            setTimeout(() => simulateNewMachine(), 5000);
+            setTimeout(() => simulateNewMachine(), 8000);
+            
+            // Connexions aléatoires continues
+            setInterval(() => {
+                if (Math.random() > 0.8 && connectedMachines.size < 10) {
+                    simulateNewMachine();
+                }
+                if (Math.random() > 0.9 && connectedMachines.size > 2) {
+                    disconnectRandomMachine();
+                }
+            }, 15000);
+        }
+
         // Démarrer la simulation
         simulateActivity();
+        
+        // Démarrer les connexions automatiques après connexion
+        function startDashboardFeatures() {
+            startAutoConnections();
+        }
 
         // Vérifier si l'utilisateur est déjà connecté (simulation)
         // En production, vous vérifieriez un token ou une session
